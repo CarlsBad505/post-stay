@@ -1,0 +1,12 @@
+.jumbotron {
+	text-align: center;
+}
+
+.jumbotron h1 {
+	font-family: fantasy;
+}
+
+.intro {
+	display: inline-block;
+	margin-left: 15px;
+}
