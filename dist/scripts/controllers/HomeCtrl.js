@@ -1,8 +1,10 @@
 (function() {
-	function HomeCtrl(User, $uibModal) {
+	function HomeCtrl(User, Alert, $uibModal) {
 		var vm = this;
 		
-		vm.currentUser = User.currentUser; 
+		vm.currentUser = User.currentUser;
+		// vm.closeAlert = Alert.closeAlert; // Fix this after you get the alerts to work
+		vm.alerts = Alert.alerts;
 		
 		vm.signUpModal = function() {
 			var modalInstance = $uibModal.open({
@@ -25,7 +27,7 @@
 			modalInstance.result.then(function(data) {
 				User.createUser(data);
 			});
-		}
+		};
 		
 		vm.logInModal = function() {
 			var modalInstance = $uibModal.open({
@@ -46,12 +48,12 @@
 			});
 			
 			modalInstance.result.then(function(data) {
-				User.logInUser(data);
+				User.logInUser(data);	
 			});
-		}
+		};
 	};
 	
 	angular
 		.module('postStay')
-		.controller('HomeCtrl', ['User', '$uibModal', HomeCtrl]);
+		.controller('HomeCtrl', ['User', 'Alert', '$uibModal', HomeCtrl]);
 })();

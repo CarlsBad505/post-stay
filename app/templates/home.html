@@ -1,3 +1,7 @@
+<div>
+	<uib-alert ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="closeAlert($index)">{{ alert.msg }}</uib-alert>
+</div>
+
 <div class="jumbotron">
 	<h1>Evolve Post Stay Faction</h1>
 	<p>Designed to counter the lack of accountability, timeliness, and organization behind post stay charges. Join Us.</p>

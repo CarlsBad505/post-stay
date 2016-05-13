@@ -1,12 +1,13 @@
 (function() {
-	function User($firebaseArray){
+	function User($firebaseArray, Alert){
 		var ref = new Firebase("https://post-stay.firebaseio.com");
+		var authData = ref.getAuth();
 		var currentUser = '';
 		
 		var users = {
 			createUser: createUser,
 			logInUser: logInUser,
-			currentUser: currentUser
+			currentUser: currentUser,
 		};
 		
 		return users;
@@ -17,6 +18,7 @@
 					console.log("Error creating user:", error);
 				} else {
 					console.log("Successfully created user account with uid:", userData.uid);
+					Alert.addAlert("success", "Account created successfully!");
 				}
 			});
 		}
@@ -27,13 +29,23 @@
 					console.log("Login Failed!", error);
 				} else {
 					console.log("Authenticated successfully with payload:", authData);
-					currentUser = authData.password.email; // Not working currently
+					Alert.addAlert("success", "Logged in successfully!");
+					//currentUser = authData.password.email; // Not working currently
 				}
 			});
 		}
+		
+//		function currentUser(authData) {
+//			if (authData) {
+//				console.log("user is logged in");
+//				Alert.addAlert("success", "Logged in successfully!");
+//			} else {
+//				console.log("user is logged out");
+//			}
+//		}
 	};
 	
 	angular
 		.module('postStay')
-		.factory('User', ['$firebaseArray', User]);
+		.factory('User', ['$firebaseArray', 'Alert', User]);
 })();
