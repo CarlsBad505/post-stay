@@ -12,16 +12,16 @@
 		return alertService;
 		
 		function closeAlert(index) {
-			return alerts.splice(index, 1);	
+			alerts.splice(index, 1);	
 		}
 		
 		function addAlert(type, msg) {
-			return alerts.push({type: type, msg: msg});	
+			alerts.push({type: type, msg: msg});	
 		}
 		
 		function get() {
 			return alerts;
-		}
+		};
 	}
 	
 	angular

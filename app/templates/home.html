@@ -1,4 +1,5 @@
 <div>
+	<p>{{ vm.alerts }}</p>
 	<uib-alert ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="closeAlert($index)">{{ alert.msg }}</uib-alert>
 </div>
 

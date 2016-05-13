@@ -12,14 +12,16 @@
 		
 		return users;
 		
-		function createUser(userObject) {
+		function createUser(userObject, callback) {
 			ref.createUser(userObject, function(error, userData) {
 				if (error) {
 					console.log("Error creating user:", error);
+					Alert.addAlert("danger", "Error Message");
 				} else {
 					console.log("Successfully created user account with uid:", userData.uid);
 					Alert.addAlert("success", "Account created successfully!");
 				}
+				callback();
 			});
 		}
 		
