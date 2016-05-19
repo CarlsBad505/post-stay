@@ -2,10 +2,16 @@
 	function HomeCtrl(User, Alert, $uibModal, $scope) {
 		var vm = this;
 		
-		vm.currentUser = User.currentUser;
-		// vm.closeAlert = Alert.closeAlert; // Fix this after you get the alerts to work
-		
-		vm.alerts = Alert.get();
+		vm.logInLink = "Log In";
+		vm.alerts = Alert.alerts;
+		vm.closeAlert = Alert.closeAlert;
+		vm.logOut = function() {
+			User.logOut();
+			vm.currentUser = '';
+			vm.logInLink = "Log In";
+			vm.logOutLink = '';
+			vm.trackClaims = '';
+		};
 		
 		vm.signUpModal = function() {
 			var modalInstance = $uibModal.open({
@@ -26,7 +32,14 @@
 			});
 			
 			modalInstance.result.then(function(data) {
-				User.createUser(data, function(){
+				User.createUser(data, function(error, userData){
+					if (error) {
+						console.log("Error creating user:", error);
+						Alert.addAlert("danger", "Whoops, your inputs are wrong, please try again!");
+					} else {
+						console.log("Successfully created user account with uid:", userData.uid);
+						Alert.addAlert("success", "Radical, welcome to the gang. Please log in!");
+					}
 					$scope.$apply();
 				});
 			});
@@ -44,16 +57,74 @@
 						$uibModalInstance.dismiss('cancel');
 					};
 					$scope.create = function() {
-						$uibModalInstance.close($scope.existingUser); 
+						$uibModalInstance.close($scope.existingUser);
+					};
+					$scope.forgotPassword = function() {
+						vm.forgotPassword();
+						$uibModalInstance.dismiss('cancel');
+					}
+				},
+				size: 'md'
+			});
+			
+			modalInstance.result.then(function(data) {
+				User.logInUser(data, function() {
+					vm.currentUser = User.getCurrentUser();
+					vm.logOutLink = "Log Out";
+					vm.logInLink = '';
+					vm.trackClaims = "Track Claims";
+					$scope.$apply();
+				});
+			});
+		};
+	
+		vm.forgotPassword = function() {
+			var modalInstance = $uibModal.open({
+				templateUrl: '/templates/forgot_password.html',
+				controller: function($scope, $uibModalInstance) {
+					$scope.forgot = '';
+					$scope.cancel = function() {
+						$uibModalInstance.dismiss('cancel');
+					};
+					$scope.create = function() {
+						$uibModalInstance.close($scope.forgot);
 					};
 				},
 				size: 'md'
 			});
 			
 			modalInstance.result.then(function(data) {
-				User.logInUser(data);
+				User.forgotPassword(data, function() {
+					$scope.$apply();
+				});
 			});
-		};
+		}
+		
+		vm.resetPassword = function() {
+			var modalInstance = $uibModal.open({
+				templateUrl: '/templates/reset_password.html',
+				controller: function($scope, $uibModalInstance) {
+					$scope.reset = {
+						email: '',
+						oldPassword: '',
+						newPassword: ''
+					};
+					$scope.cancel = function() {
+						$uibModalInstance.dismiss('cancel');
+					};
+					$scope.create = function() {
+						$uibModalInstance.close($scope.reset);
+					};
+				},
+				size: 'md'
+			});
+			
+			modalInstance.result.then(function(data) {
+				User.resetPassword(data, function() {
+					$scope.$apply();
+				});
+			});
+		}
 	};
 	
 	angular

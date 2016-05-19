@@ -1,12 +1,90 @@
-.jumbotron {
+.hero-content {
+	position: relative;
+	min-height: 800px;
+	background-image: url(../assets/images/cover.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
 	text-align: center;
 }
 
-.jumbotron h1 {
+.hero-content .hero-title {
+	position: absolute;
+	top: 30%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	width: 100%;
+	text-align: center;
+	font-size: 4rem;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 0.5rem;
+	text-shadow: 1px 1px 0px rgb(58,23,63);
 	font-family: fantasy;
+	color: white;
 }
 
-.intro {
-	display: inline-block;
-	margin-left: 15px;
+.hero-content .hero-sub-title {
+	position: absolute;
+	top: 40%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	width: 100%;
+	text-align: center;
+	font-size: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 0.5rem;
+	text-shadow: 1px 1px 0px rgb(58,23,63);
+	color: white;
+}
+
+.buttons {
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.navbar .links-container {
+	display: table;
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100px;
+	color: white;
+	text-decoration: none;
+}
+
+.links-container .navbar-link {
+	display: table-cell;
+	position: relative;
+	height: 100%;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	vertical-align: middle;
+	color: white;
+	font-size: 0.8rem;
+	letter-spacing: 0.05rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.links-container .navbar-link:hover {
+	color: rgb(233,50,117);
+}
+
+.sign-up {
+	margin-left: -120px;
+}
+
+.alerts {
+	margin-bottom: 0px;
 }

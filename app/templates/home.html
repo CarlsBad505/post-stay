@@ -1,14 +1,20 @@
 <div>
-	<p>{{ vm.alerts }}</p>
-	<uib-alert ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="closeAlert($index)">{{ alert.msg }}</uib-alert>
+	<uib-alert ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="vm.closeAlert()" dismiss-on-timeout="5000" class="alerts">
+		{{ alert.msg }}
+	</uib-alert>
 </div>
 
-<div class="jumbotron">
-	<h1>Evolve Post Stay Faction</h1>
-	<p>Designed to counter the lack of accountability, timeliness, and organization behind post stay charges. Join Us.</p>
-	<button class="btn btn-success btn-lg intro" ng-click="vm.signUpModal()">Sign Up!</button>
-	<button class="btn btn-primary btn-lg intro" ng-click="vm.logInModal()">Log In!</button>
-	<p>Welcome {{ vm.currentUser }}</p>
-</div>
-
-
+<section class="hero-content">
+	<nav class="navbar">
+		<div class="links-container">
+			<a ui-sref="#" class="navbar-link">{{ vm.trackClaims }}</a>
+			<a class="navbar-link" ng-click="vm.logInModal()">{{ vm.logInLink }}</a>
+			<a class="navbar-link" ng-click="vm.logOut()">{{ vm.logOutLink }}</a>
+			<p class="navbar-link" ng-click="vm.resetPassword()">{{ vm.currentUser }}</p>
+		</div>
+	</nav>
+	<h1 class="hero-title">Evolve Post Stay Faction</h1>
+	<p class="hero-sub-title">Designed to enhance accountability, timeliness, and organization behind post stay charges</p>
+	<button class="btn btn-success btn-lg buttons sign-up" ng-click="vm.signUpModal()">Sign Up!</button>
+	<button class="btn btn-primary btn-lg buttons" ng-click="vm.logInModal()">Log In!</button>
+</section>
