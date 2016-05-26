@@ -2,6 +2,12 @@
 	function User(Alert){
 		var ref = new Firebase("https://post-stay.firebaseio.com");
 		var authData = ref.getAuth();
+		var logInLink = "Log In";
+		var logOutLink = "Log Out";
+		var trackClaims = "Track Claims";
+		var signUpLink = "Sign Up!";
+		var loggedIn = false;
+		var currentUserShow = false;
 		
 		var users = {
 			createUser: createUser,
@@ -9,10 +15,26 @@
 			getCurrentUser: getCurrentUser,
 			logOut: logOut,
 			forgotPassword: forgotPassword,
-			resetPassword: resetPassword
+			resetPassword: resetPassword,
+			logInLink: logInLink,
+			logOutLink: logOutLink,
+			trackClaims: trackClaims,
+			signUpLink: signUpLink,
+			loggedIn: loggedIn,
+			currentUserShow: currentUserShow,
+			loggedInStatus: loggedInStatus,
+			currentUserStatus: currentUserStatus
 		};
 		
 		return users;
+		
+		function currentUserStatus() {
+			return currentUserShow;
+		}
+		
+		function loggedInStatus() {
+			return loggedIn;
+		}
 		
 		function getCurrentUser() {
 			if (authData) {
@@ -23,9 +45,25 @@
 		}
 		
 		function logOut() {
-			ref.unauth();
+			ref.unauth() 
 			Alert.addAlert("warning", "What? You're leaving already? Goodbye!");
-		}
+			loggedIn = false;
+			currentUserShow = false;
+		};
+		
+//		function logOut() {
+//			var promise = new Promise(function(resolve, reject) {
+//				if(ref.unauth()) {
+//					Alert.addAlert("warning", "What? You're leaving already? Goodbye!");
+//					loggedIn = false;
+//					currentUserShow = false;
+//					resolve('success');
+//				} else {
+//					reject('error');
+//				}
+//			});
+//			return promise;
+//		};
 		
 		function createUser(userObj, callback) {
 			ref.createUser({
@@ -45,13 +83,15 @@
 				} else {
 					console.log("Authenticated successfully with payload:", authData); // Comment out when done testing
 					Alert.addAlert("success", "Awwww yeah, logged in successfully!");
+					loggedIn = true;
+					currentUserShow = true;
 				}
 				callback();
 			});
 		}
 		
-		function forgotPassword(email, callback) {
-			ref.resetPassword({ email: email }, function(error) {
+		function forgotPassword(userObj, callback) {
+			ref.resetPassword({ email: userObj.email }, function(error) {
 				if(error) {
 					console.log("Error: ", error); // Comment out when done testing
 					Alert.addAlert("danger", "Couldn't find that email, please try again.");

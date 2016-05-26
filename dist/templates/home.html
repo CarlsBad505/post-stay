@@ -1,20 +1,14 @@
+<!--
 <div>
 	<uib-alert ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="vm.closeAlert()" dismiss-on-timeout="5000" class="alerts">
 		{{ alert.msg }}
 	</uib-alert>
 </div>
+-->
 
 <section class="hero-content">
-	<nav class="navbar">
-		<div class="links-container">
-			<a ui-sref="#" class="navbar-link">{{ vm.trackClaims }}</a>
-			<a class="navbar-link" ng-click="vm.logInModal()">{{ vm.logInLink }}</a>
-			<a class="navbar-link" ng-click="vm.logOut()">{{ vm.logOutLink }}</a>
-			<p class="navbar-link" ng-click="vm.resetPassword()">{{ vm.currentUser }}</p>
-		</div>
-	</nav>
 	<h1 class="hero-title">Evolve Post Stay Faction</h1>
 	<p class="hero-sub-title">Designed to enhance accountability, timeliness, and organization behind post stay charges</p>
-	<button class="btn btn-success btn-lg buttons sign-up" ng-click="vm.signUpModal()">Sign Up!</button>
-	<button class="btn btn-primary btn-lg buttons" ng-click="vm.logInModal()">Log In!</button>
+	<button class="btn btn-success btn-lg buttons sign-up" ng-click="nav.signUpModal()">{{ nav.signUpLink }}</button>
+	<button class="btn btn-primary btn-lg buttons" ng-click="nav.navLogInModal()">{{ nav.logInLink }}</button>
 </section>

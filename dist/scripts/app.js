@@ -9,9 +9,18 @@
 		$stateProvider
 			.state('home', {
 				url: '/',
-				controller: 'HomeCtrl as vm',
-				templateUrl: '/templates/home.html'
-		});
+				controller: 'NavCtrl as nav',
+				templateUrl: '/templates/home.html',
+			//  possible way to handle multiple background images
+//				data: {
+//					main_layout_background_url: "http://asdfasfasdf.png",
+//				}
+			})
+			.state('track-claims', {
+				url: '/track-claims',
+				controller: 'ClaimsCtrl as cl',
+				templateUrl: '/templates/track_claims.html'
+			});
 		
 	}
 	
