@@ -25,6 +25,6 @@
 	}
 	
 	angular
-		.module('postStay', ['ui.router', 'firebase', 'ui.bootstrap'])
+		.module('postStay', ['ui.router', 'firebase', 'ui.bootstrap', 'ui.grid'])
 		.config(config);
 })();

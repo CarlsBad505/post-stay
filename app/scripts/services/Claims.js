@@ -11,6 +11,9 @@
 		return claimsService;
 		
 		function getClaims() {
+			for (var claim in claimRef) {
+				claim.reportedDate = new Date(claim.reportedDate).toDateString();
+			}
 			return claimRef;
 		}
 		

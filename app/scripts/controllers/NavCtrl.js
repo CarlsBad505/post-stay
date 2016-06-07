@@ -3,8 +3,8 @@
 		var nav = this;
 		
 		// Handles markup and ng-show logic
-		nav.loggedIn = User.loggedIn;
-		nav.currentUserShow = User.currentUserShow;
+		nav.loggedIn = User.loggedIn();
+		nav.currentUser = User.getCurrentUser();
 		nav.signUpLink = User.signUpLink;
 		nav.logInLink = User.logInLink;
 		nav.logOutLink = User.logOutLink;
@@ -17,8 +17,7 @@
 		// Handles User Authentication
 		nav.logOut = function() {
 			User.logOut();
-			nav.currentUserShow = User.currentUserShow;
-			nav.loggedIn = User.loggedIn;
+			nav.loggedIn = User.loggedIn();
 		};
 		
 		nav.navLogInModal = function() {
@@ -42,8 +41,7 @@
 			
 			modalInstance.result.then(function(data) {
 				User.logInUser(data, function() {
-					nav.loggedIn = User.loggedInStatus();
-					nav.currentUserShow = User.currentUserStatus();
+					nav.loggedIn = User.loggedIn();
 					nav.currentUser = User.getCurrentUser();
 					$scope.$apply();
 				});

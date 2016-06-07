@@ -3,6 +3,10 @@
 	vertical-align: top;
 }
 
+.color {
+	color: green;
+}
+
 .checkbox-label {
 	margin-right: 20px;
 }

@@ -6,8 +6,6 @@
 		var logOutLink = "Log Out";
 		var trackClaims = "Track Claims";
 		var signUpLink = "Sign Up!";
-		var loggedIn = false;
-		var currentUserShow = false;
 		
 		var users = {
 			createUser: createUser,
@@ -20,24 +18,23 @@
 			logOutLink: logOutLink,
 			trackClaims: trackClaims,
 			signUpLink: signUpLink,
-			loggedIn: loggedIn,
-			currentUserShow: currentUserShow,
-			loggedInStatus: loggedInStatus,
-			currentUserStatus: currentUserStatus
+			loggedIn: loggedIn
 		};
 		
 		return users;
 		
-		function currentUserStatus() {
-			return currentUserShow;
-		}
-		
-		function loggedInStatus() {
-			return loggedIn;
+		function loggedIn() {
+			var retrieveUser = ref.getAuth();
+			if (retrieveUser) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 		
 		function getCurrentUser() {
-			if (authData) {
+			var retrieveUser = ref.getAuth();
+			if (retrieveUser) {
 				return "Welcome - " + authData.password.email;
 			} else {
 				return '';
@@ -47,23 +44,7 @@
 		function logOut() {
 			ref.unauth() 
 			Alert.addAlert("warning", "What? You're leaving already? Goodbye!");
-			loggedIn = false;
-			currentUserShow = false;
 		};
-		
-//		function logOut() {
-//			var promise = new Promise(function(resolve, reject) {
-//				if(ref.unauth()) {
-//					Alert.addAlert("warning", "What? You're leaving already? Goodbye!");
-//					loggedIn = false;
-//					currentUserShow = false;
-//					resolve('success');
-//				} else {
-//					reject('error');
-//				}
-//			});
-//			return promise;
-//		};
 		
 		function createUser(userObj, callback) {
 			ref.createUser({
@@ -83,8 +64,6 @@
 				} else {
 					console.log("Authenticated successfully with payload:", authData); // Comment out when done testing
 					Alert.addAlert("success", "Awwww yeah, logged in successfully!");
-					loggedIn = true;
-					currentUserShow = true;
 				}
 				callback();
 			});
