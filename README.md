@@ -11,3 +11,7 @@ Users can go about utilizing the application by first signing up and authenticat
 ![alt text](https://github.com/CarlsBad505/post-stay/blob/master/post-stay-grid.png "Track Claims")
 
 ![alt text](https://github.com/CarlsBad505/post-stay/blob/master/post-stay-add.png "Add New Claim") 
+
+## Live Preview
+
+[Click Here For a Live Preview](https://afternoon-wildwood-33093.herokuapp.com)
