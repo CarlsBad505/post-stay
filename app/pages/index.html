@@ -22,6 +22,7 @@
 		
 		<nav class="navbar">
 			<div class="links-container">
+				<a class="navbar-link" ui-sref="home">Home</a>
 				<a ng-show="nav.loggedIn" ui-sref="track-claims" class="navbar-link">{{ nav.trackClaims }}</a>
 				<a ng-show="!nav.loggedIn" class="navbar-link" ng-click="nav.navLogInModal()">{{ nav.logInLink }}</a>
 				<a ng-show="nav.loggedIn" class="navbar-link" ng-click="nav.logOut()">{{ nav.logOutLink }}</a>
@@ -45,5 +46,11 @@
 	<script src="/scripts/services/Alert.js"></script>
 	<script src="/scripts/services/User.js"></script>
 	<script src="/scripts/services/Claims.js"></script>
+	
+	<script type="text/ng-template" id="edit_claim.html">
+		<div class="ui-grid-cell-contents">
+			<button class="btn-primary" ng-click="grid.appScope.cl.updateClaimsModal(COL_FIELD)">Edit</button>
+		</div>
+	</script>
 </body>
 </html>

@@ -17,6 +17,13 @@
 	letter-spacing: 0.1rem
 }
 
+.asterik {
+	color: white;
+	text-align: center;
+	font-family: sans-serif;
+	font-size: 10x;
+}
+
 .claims-button {
 	text-align: center;
 }

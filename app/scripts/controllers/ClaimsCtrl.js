@@ -16,6 +16,7 @@
 		};
 		
 		cl.claims = Claims.getClaims();
+		
 		cl.gridOptions = {
 			enableSorting: true,
 			columnDefs: [
@@ -28,7 +29,8 @@
 				{ name: 'itemOne.name', displayName: "Description", enableHiding: false, cellTooltip: true },
 				{ name: 'itemOne.photo', displayName: "Photo?", enableHiding: false },
 				{ name: 'itemOne.invoice', displayName: "Invoice?", enableHiding: false },
-				{ name: 'itemOne.chargeSuccess', displayName: "Charged?", enableHiding: false }
+				{ name: 'itemOne.chargeSuccess', displayName: "Charged?", enableHiding: false },
+				{ name: '$id', displayName: 'Edit', cellTemplate: 'edit_claim.html', maxWidth: 60, enableColumnMenu: false }
 			],
 			data: claimsData,
 			minRowsToShow: 10,
@@ -65,6 +67,43 @@
 				data.reportedDate = dateToJSON(data.reportedDate);
 				data.travelerCheckoutDate = dateToJSON(data.travelerCheckoutDate);
 				Claims.newClaim(data);
+			});
+		};
+		
+		cl.updateClaimsModal = function(id) {
+			var key = Claims.getSpecificClaim(id);
+			var modalInstance = $uibModal.open({
+				templateUrl: '/templates/edit_claim.html',
+				controller: function($scope, $uibModalInstance) {
+					$scope.edit = {
+						caseNumber: key.caseNumber,
+						damageClaim: key.damageClaim,
+						damageClaimNumber: key.damageClaimNumber,
+						resolved: key.resolved,
+						reportedDate: new Date(key.reportedDate),
+						travelerCheckoutDate: new Date(key.travelerCheckoutDate),
+						itemOne: {
+							name: key.itemOne.name,
+							photo: key.itemOne.photo,
+							invoice: key.itemOne.invoice,
+							chargeSuccess: key.itemOne.chargeSuccess
+						},
+						id: key.$id
+					};
+					$scope.cancel = function() {
+						$uibModalInstance.dismiss('cancel');
+					};
+					$scope.create = function() {
+						$uibModalInstance.close($scope.edit);
+					};
+				},
+				size: 'lg'
+			});
+			
+			modalInstance.result.then(function(data) {
+				data.reportedDate = dateToJSON(data.reportedDate);
+				data.travelerCheckoutDate = dateToJSON(data.travelerCheckoutDate);
+				Claims.editClaim(data);
 			});
 		};
 	}
