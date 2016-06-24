@@ -25,6 +25,7 @@
 				<a class="navbar-link" ui-sref="home">Home</a>
 				<a ng-show="nav.loggedIn" ui-sref="track-claims" class="navbar-link">{{ nav.trackClaims }}</a>
 				<a ng-show="!nav.loggedIn" class="navbar-link" ng-click="nav.navLogInModal()">{{ nav.logInLink }}</a>
+				<a ng-show="!nav.loggedIn" class="navbar-link" ng-click="nav.navSignUpModal()">{{ nav.signUpLink }}</a>
 				<a ng-show="nav.loggedIn" class="navbar-link" ng-click="nav.logOut()">{{ nav.logOutLink }}</a>
 				<p ng-show="nav.loggedIn" class="navbar-link" ng-click="nav.resetPassword()">{{ nav.currentUser }}</p>
 			</div>
